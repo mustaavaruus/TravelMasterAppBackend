@@ -13,7 +13,8 @@ namespace TravelMasterAppBackend.Controllers
         public readonly TicketService TicketService;
         public TicketController()
         {
-            TicketService = new TicketService("Server=WIN-Q84SKP32UDM;Database=enterprise_process_db;Integrated Security=true;Encrypt=False;");
+            var ConnectionString = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("AppSettings")["ConnectionString"];
+            TicketService = new TicketService(ConnectionString);
         }
 
         [HttpPost]
@@ -28,10 +29,16 @@ namespace TravelMasterAppBackend.Controllers
             return Ok(TicketService.Read(id));
         }
 
-        [HttpGet("get/all/")]
-        public IActionResult ReadAll([FromHeader] string accessToken)
+        [HttpGet("get/all/{cityId}")]
+        public IActionResult ReadAll([FromHeader] string accessToken, [FromRoute] int cityId)
         {
-            return Ok(TicketService.ReadMany(accessToken));
+            return Ok(TicketService.ReadMany(accessToken, cityId));
+        }
+
+        [HttpGet("get/count/{cityId}")]
+        public IActionResult GetCount([FromHeader] string accessToken, [FromRoute] int cityId)
+        {
+            return Ok(TicketService.GetCount(accessToken, cityId));
         }
 
         [HttpPut]

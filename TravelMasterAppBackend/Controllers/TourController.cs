@@ -13,8 +13,9 @@ namespace TravelMasterAppBackend.Controllers
         public readonly TourService TourService;
         public TourController()
         {
-            UserService = new UserService("Server=DESKTOP-TFC9VKL;Database=enterprise_process_db;Integrated Security=true;Encrypt=False;");
-            TourService = new TourService("Server=DESKTOP-TFC9VKL;Database=enterprise_process_db;Integrated Security=true;Encrypt=False;");
+            var ConnectionString = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("AppSettings")["ConnectionString"];
+            UserService = new UserService(ConnectionString);
+            TourService = new TourService(ConnectionString);
         }
 
         [HttpGet("get/all/")]

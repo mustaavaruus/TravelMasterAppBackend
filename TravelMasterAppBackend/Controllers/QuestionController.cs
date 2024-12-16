@@ -13,8 +13,9 @@ namespace TravelMasterAppBackend.Controllers
         public readonly QuestionService QuestionService;
         public QuestionController()
         {
-            UserService = new UserService("Server=DESKTOP-TFC9VKL;Database=enterprise_process_db;Integrated Security=true;Encrypt=False;");
-            QuestionService = new QuestionService("Server=DESKTOP-TFC9VKL;Database=enterprise_process_db;Integrated Security=true;Encrypt=False;");
+            var ConnectionString = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("AppSettings")["ConnectionString"];
+            UserService = new UserService(ConnectionString);
+            QuestionService = new QuestionService(ConnectionString);
         }
 
         [HttpGet("get/{number}")]

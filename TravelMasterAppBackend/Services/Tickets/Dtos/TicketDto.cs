@@ -1,8 +1,8 @@
 ﻿using DbDataReaderMapper;
 
-namespace TravelMasterAppBackend.Services.Tickets.Models
+namespace TravelMasterAppBackend.Services.Tickets.Dtos
 {
-    public class Ticket
+    public class TicketDto
     {
         [DbColumn("id")]
         public int Id { get; set; }
@@ -16,11 +16,11 @@ namespace TravelMasterAppBackend.Services.Tickets.Models
         [DbColumn("price")]
         public int Price { get; set; }
 
-        [DbColumn("from_id")]
-        public int FromId { get; set; }
+        [DbColumn("city_from")]
+        public string CityFrom { get; set; }
 
-        [DbColumn("to_id")]
-        public int ToId { get; set; }
+        [DbColumn("city_to")]
+        public string CityTo { get; set; }
 
         [DbColumn("luggage_price")]
         public int LuggagePrice { get; set; }
