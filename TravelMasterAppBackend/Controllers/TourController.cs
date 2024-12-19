@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TravelMasterAppBackend.Services.Tours;
+using TravelMasterAppBackend.Services.Tours.Dtos;
 using TravelMasterAppBackend.Services.Users;
 
 namespace TravelMasterAppBackend.Controllers
@@ -18,10 +19,10 @@ namespace TravelMasterAppBackend.Controllers
             TourService = new TourService(ConnectionString);
         }
 
-        [HttpGet("get/all/")]
-        public IActionResult ReadAll([FromHeader] string accessToken)
+        [HttpPost("get/all/")]
+        public IActionResult ReadAll([FromHeader] string accessToken, [FromBody] ToursRequest request)
         {
-            return Ok(TourService.ReadMany());
+            return Ok(TourService.ReadMany(request));
         }
     }
 }

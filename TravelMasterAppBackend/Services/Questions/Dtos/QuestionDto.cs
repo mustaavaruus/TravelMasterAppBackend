@@ -1,9 +1,9 @@
-﻿namespace TravelMasterAppBackend.Services.Questions.Dtos
+﻿using TravelMasterAppBackend.Services.Questions.Models;
+
+namespace TravelMasterAppBackend.Services.Questions.Dtos
 {
     public class QuestionDto
     {
-        public string QuestionText { get; set; }
-        public List<string> AnswerTexts { get; set; } = new List<string>();
-        public List<string> ImageTexts { get; set; } = new List<string>();
-    }
+        public Question Question { get; set; }
+        public List<Answer> Answers { get; set; } = new List<Answer>();    }
 }

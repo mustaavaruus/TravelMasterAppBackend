@@ -19,13 +19,8 @@ namespace TravelMasterAppBackend.Services.Questions
             var answers = ReadMany<Answer>(sqlAnswerString);
 
             var result = new QuestionDto();
-            result.QuestionText = question.Text;
-
-            foreach (var answer in answers)
-            {
-                result.AnswerTexts.Add(answer.Text);
-                result.ImageTexts.Add(answer.Image);
-            }
+            result.Question = question;
+            result.Answers.AddRange(answers);
 
             return result;
         }
